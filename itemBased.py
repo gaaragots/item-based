@@ -3,7 +3,7 @@ import scipy.stats
 import scipy.spatial
 from sklearn.cross_validation import KFold
 import random
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_absolute_error
 from math import sqrt
 import math
 import warnings
@@ -12,8 +12,8 @@ import sys
 
 warnings.simplefilter("error")
 
-users = 6040
-items = 3952
+users = 60400
+items = 39520
 
 def readingFile(filename):
 	f = open(filename,"r")
@@ -139,11 +139,11 @@ def crossValidation(data):
 			pred_rate_jaccard.append(pred_jaccard)
 			pred_rate_pearson.append(pred_pearson)
 
-		rmse_cosine.append(sqrt(mean_squared_error(true_rate, pred_rate_cosine)))
-		rmse_jaccard.append(sqrt(mean_squared_error(true_rate, pred_rate_jaccard)))
-		rmse_pearson.append(sqrt(mean_squared_error(true_rate, pred_rate_pearson)))
+		rmse_cosine.append(sqrt(mean_absolute_error(true_rate, pred_rate_cosine)))
+		rmse_jaccard.append(sqrt(mean_absolute_error(true_rate, pred_rate_jaccard)))
+		rmse_pearson.append(sqrt(mean_absolute_error(true_rate, pred_rate_pearson)))
 
-		print str(sqrt(mean_squared_error(true_rate, pred_rate_cosine))) + "\t" + str(sqrt(mean_squared_error(true_rate, pred_rate_jaccard))) + "\t" + str(sqrt(mean_squared_error(true_rate, pred_rate_pearson)))
+		print str(sqrt(mean_absolute_error(true_rate, pred_rate_cosine))) + "\t" + str(sqrt(mean_absolute_error(true_rate, pred_rate_jaccard))) + "\t" + str(sqrt(mean_absolute_error(true_rate, pred_rate_pearson)))
 		#raw_input()
 
 	#print sum(rms) / float(len(rms))
